@@ -1,31 +1,31 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class PathCounter {
 	public static void main(String[] args) {
 		// Read input file
+		File inputFile = null;
+		Scanner input = null;
 		try {
-            File input = new File("simple0.input");
-        } catch (NullPointerException e) {
-            System.err.println("Error: file" + input.getName() + "not found");
+			inputFile = new File("simple0.input");
+			input = new Scanner(inputFile);
+        } catch (NullPointerException | FileNotFoundException e) {
+            System.err.println("Error: file not found");
             System.exit(1);
-}
+		}
+
 		// Parse input file
-		int numVertices;
-		int numEdges;
+		int numVertices = input.nextInt();
+		int numEdges = input.nextInt();
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 
-		//TODO: make first line assign numVertices and numEdges
-		//TODO: for each additional line, make new edge and add to ArrayList
+		while (input.hasNextInt()) {
+			edges.add(new Edge(input.nextInt(), input.nextInt()));
+		}
 
 		//TODO: calculations 
 	}
 
-	private class Edge {
-		public int a,b;
-		public Edge(int a, int b) {
-			this.a = a;
-			this.b = b;
-		}
-	}
 }
