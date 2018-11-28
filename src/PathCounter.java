@@ -11,9 +11,9 @@ public class PathCounter {
 		try {
 			inputFile = new File("simple0.input");
 			input = new Scanner(inputFile);
-        } catch (NullPointerException | FileNotFoundException e) {
-            System.err.println("Error: file not found");
-            System.exit(1);
+		} catch (NullPointerException | FileNotFoundException e) {
+			System.err.println("Error: file not found");
+			System.exit(1);
 		}
 
 		// Parse input file
