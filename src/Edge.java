@@ -4,4 +4,13 @@ public class Edge {
         this.a = a;
         this.b = b;
     }
+    
+    public Edge addEdge(int a, int b) {
+    	return new Edge(a,b);
+    }
+    
+    public Edge addAdjacentEdge(int a, int b) {
+    	return new Edge(a,b);
+    }
+    
 }
