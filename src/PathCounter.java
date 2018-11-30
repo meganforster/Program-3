@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 public class PathCounter {
 	public static void main(String[] args) {
 		// Read input file
-		File inputFile = null;
+		File inputFile;
 		Scanner input = null;
 		try {
 			inputFile = new File("simple0.input");
@@ -19,13 +19,20 @@ public class PathCounter {
 		// Parse input file
 		int numVertices = input.nextInt();
 		int numEdges = input.nextInt();
-		ArrayList<Edge> edges = new ArrayList<Edge>();
-
+		/* Graph is an array of LinkedLists. Each index represents a vertex, where each LinkedList in the array
+		 * represents the edges coming off of the vertex, making a list of its children.
+		 */
+		LinkedList[] graph = new LinkedList[numVertices];
 		while (input.hasNextInt()) {
-			edges.add(new Edge(input.nextInt(), input.nextInt()));
+			int a = input.nextInt();
+			int b = input.nextInt();
+			// Add the child b to the ath position of the array, so index a represents a list of all nodes a points to
+			// i.e. add an adge from a to b
+			if (graph[a] == null) graph[a] = new LinkedList();
+			graph[a].add(b);
 		}
-
-		//TODO: calculations 
+		//TODO: test that this graph works
+		//TODO: calculations
 	}
 
 }
