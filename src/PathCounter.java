@@ -15,7 +15,8 @@ public class PathCounter {
 		File inputFile;
 		Scanner input = null;
 		try {
-			inputFile = new File("simple0.input");
+			//cycle2, cycle7 give numerical answers instead of infinite
+			inputFile = new File("cycle2.input");
 			input = new Scanner(inputFile);
 		} catch (NullPointerException | FileNotFoundException e) {
 			System.err.println("Error: file not found");
@@ -35,6 +36,7 @@ public class PathCounter {
 		LinkedList<Integer>[] graph = new LinkedList[numVertices];
 
 		// Parse file for all edges and add to graph
+		long startTime = System.currentTimeMillis();
 		for (int i = 0; i < numEdges; i++) {
 			int a = input.nextInt();
 			int b = input.nextInt();
@@ -48,7 +50,12 @@ public class PathCounter {
 		t = input.nextInt();
 
 		// Run a test
+		try {
 		System.out.println("There are " + findNumOfPaths(s, t, graph) + " paths from " + s + " to " + t + ".");
+		}catch (StackOverflowError e) {
+			System.out.println("There are infinite paths from " + s + " to " + t + ".");
+		}
+		System.out.println("How long this took: " + (System.currentTimeMillis()-startTime));
 	}
 
 	// Find the paths from point a to b
