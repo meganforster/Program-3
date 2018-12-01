@@ -19,66 +19,47 @@ public class PathCounter {
 			System.exit(1);
 		}
 
-		// Parse input file
+		// Start parsing input file
 		numVertices = input.nextInt();
 		int numEdges = input.nextInt();
-		/*
-		 * Graph is an array of LinkedLists. Each index represents a vertex, where each
-		 * LinkedList in the array represents the edges coming off of the vertex, making
-		 * a list of its children.
+
+		/* Create the graph:
+		 * graph is an adjacency list represented by an array of LinkedLists.
+		 * Each index of the array represents a vertex, where each LinkedList 
+		 * contains the edges adjacent to it.
 		 */
 		LinkedList<Integer>[] graph = new LinkedList[numVertices];
+
+		// Finish parsing input file
 		while (input.hasNextInt()) {
 			int a = input.nextInt();
 			int b = input.nextInt();
-			// Add the child b to the ath position of the array, so index a represents a
-			// list of all nodes a points to
-			// i.e. add an adge from a to b
-			if (graph[a] == null)
-				graph[a] = new LinkedList<Integer>();
+			// Add an edge from a to b
+			if (graph[a] == null) graph[a] = new LinkedList<Integer>();
 			graph[a].add(b);
 		}
-		// TODO: test that this graph works
-		// TODO: calculations
+
+		// Run a test
 		System.out.println(findNumOfPaths(1, 7, graph));
-
 	}
-	// a is starting point
-	// b is finish point
-	// x is current pointer
 
+	// Find the paths from point a to b
+	// Initially, b is the final destination but it will recursively move up
 	public static long findNumOfPaths(int a, int b, LinkedList<Integer>[] graph) {
 		int numOfPaths = 0;
-		long check = 0;
-		int x = b;
-
-			if (x == a) {
-				numOfPaths++;
-				check = 0;
-				return numOfPaths;
-			} else {
-				for (LinkedList<Integer> list : graph) {
-					if (list != null && list.contains(x)) {
-						
-						for (Integer i : list) {
-
-							findNumOfPaths(a, x, graph);
-
-							if (check < numVertices) {
-								if (i == x) {
-									check++;
-									pointer = false;
-								} else {
-									findNumOfPaths(a, x, graph);
-								}
-							} //
-							System.out.println(i);
-						}
-					}
+		if (a == b) {
+			// If start point is the same as end point, we have found a complete path
+			numOfPaths++;
+		} else {
+			for (int i = 0; i < graph.length; i++) {
+				// for every node adjacent to end point
+				if (graph[i] != null && graph[i].contains(b)) {
+					// find the number of paths from beginning to that node
+					System.out.println(numOfPaths);
+					numOfPaths += findNumOfPaths(a, i, graph);
 				}
-
+			}
 		}
-		System.out.println(numOfPaths);
 		return numOfPaths;
 	}
 
