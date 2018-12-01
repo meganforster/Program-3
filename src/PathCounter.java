@@ -51,8 +51,9 @@ public class PathCounter {
 			// If start point is the same as end point, we have found a complete path
 			numOfPaths++;
 		} else {
+			// For every node
 			for (int i = 0; i < graph.length; i++) {
-				// for every node adjacent to end point
+				// If this node exists and is adjacent to end point
 				if (graph[i] != null && graph[i].contains(b)) {
 					// find the number of paths from beginning to that node
 					System.out.println(numOfPaths);
