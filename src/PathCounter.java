@@ -36,16 +36,16 @@ public class PathCounter {
 
 		// Parse file for all edges and add to graph
 		for (int i = 0; i < numEdges; i++) {
-            int a = input.nextInt();
+			int a = input.nextInt();
 			int b = input.nextInt();
 			// Add an edge from a to b
 			if (graph[a] == null) graph[a] = new LinkedList<Integer>();
 			graph[a].add(b);
-        }
+		}
         
-        // Parse file for start and end points
-        s = input.nextInt();
-        t = input.nextInt();
+		// Parse file for start and end points
+		s = input.nextInt();
+		t = input.nextInt();
 
 		// Run a test
 		System.out.println("There are " + findNumOfPaths(s, t, graph) + " paths from " + s + " to " + t + ".");
