@@ -31,6 +31,7 @@ public class PathCounter {
 		 * Each index of the array represents a vertex, where each LinkedList 
 		 * contains the edges adjacent to it.
 		 */
+		@SuppressWarnings("unchecked")
 		LinkedList<Integer>[] graph = new LinkedList[numVertices];
 
 		// Finish parsing input file
