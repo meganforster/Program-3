@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 public class PathCounter {
 
 	static int numVertices;
+	static int numEdges;
 	static int s;
 	static int t;
 
@@ -23,10 +24,10 @@ public class PathCounter {
 
 		// Start parsing input file
 		numVertices = input.nextInt();
-		int numEdges = input.nextInt();
+		numEdges = input.nextInt();
 
 		/* Create the graph:
-		 * graph is an adjacency list represented by an array of LinkedLists.
+		 * 'graph' is an adjacency list represented by an array of LinkedLists.
 		 * Each index of the array represents a vertex, where each LinkedList 
 		 * contains the edges adjacent to it.
 		 */
@@ -65,7 +66,7 @@ public class PathCounter {
 			for (int i = 0; i < graph.length; i++) {
 				// If this node exists and is adjacent to end point
 				if (graph[i] != null && graph[i].contains(b)) {
-					// find the number of paths from beginning to that node
+					// Find the number of paths from beginning to that node
 					numOfPaths += findNumOfPaths(a, i, graph);
 				}
 			}
