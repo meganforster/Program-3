@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 public class PathCounter {
 
 	static int numVertices;
+	static int s;
+	static int t;
 
 	public static void main(String[] args) {
 		// Read input file
@@ -34,13 +36,21 @@ public class PathCounter {
 		while (input.hasNextInt()) {
 			int a = input.nextInt();
 			int b = input.nextInt();
+			
+			// If a and b are the last 2 values in the list then they are our start and end points
+			if(!input.hasNextInt()) {
+				s = a;
+				t = b;
+				break;
+			}
+			
 			// Add an edge from a to b
 			if (graph[a] == null) graph[a] = new LinkedList<Integer>();
 			graph[a].add(b);
 		}
 
 		// Run a test
-		System.out.println(findNumOfPaths(1, 7, graph));
+		System.out.println("There are " + findNumOfPaths(s, t, graph) + " paths from " + s + " to " + t + ".");
 	}
 
 	// Find the paths from point a to b
@@ -56,7 +66,6 @@ public class PathCounter {
 				// If this node exists and is adjacent to end point
 				if (graph[i] != null && graph[i].contains(b)) {
 					// find the number of paths from beginning to that node
-					System.out.println(numOfPaths);
 					numOfPaths += findNumOfPaths(a, i, graph);
 				}
 			}
