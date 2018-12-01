@@ -34,22 +34,18 @@ public class PathCounter {
 		@SuppressWarnings("unchecked")
 		LinkedList<Integer>[] graph = new LinkedList[numVertices];
 
-		// Finish parsing input file
-		while (input.hasNextInt()) {
-			int a = input.nextInt();
+		// Parse file for all edges and add to graph
+		for (int i = 0; i < numEdges; i++) {
+            int a = input.nextInt();
 			int b = input.nextInt();
-			
-			// If a and b are the last 2 values in the list then they are our start and end points
-			if(!input.hasNextInt()) {
-				s = a;
-				t = b;
-				break;
-			}
-			
 			// Add an edge from a to b
 			if (graph[a] == null) graph[a] = new LinkedList<Integer>();
 			graph[a].add(b);
-		}
+        }
+        
+        // Parse file for start and end points
+        s = input.nextInt();
+        t = input.nextInt();
 
 		// Run a test
 		System.out.println("There are " + findNumOfPaths(s, t, graph) + " paths from " + s + " to " + t + ".");
