@@ -3,6 +3,11 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/* Path Counter
+ * By Joey Germain, Megan Forster, Alexandra Martin, and Mike Murphy
+ * 12/5/18
+ */
+ 
 public class PathCounter {
 
 	// Test-specific variables
@@ -10,13 +15,13 @@ public class PathCounter {
 	static int numEdges;
 	static int s;
 	static int t;
-	
+
 	// Constants
 	static final int INFINITE_NOT_IN_PATH = -4; // Infinite loop not in the path from s to t (doesn't affect answer)
 	static final int INFINITE_IN_PATH = -3;     // Infinite loop in the path (infinite paths from s to t)
 	static final int VISITED = -2;              // Node has already been visited
-	static final int NOT_VISITED = -1;          // Number of paths has not yet been calculated 
- 
+	static final int NOT_VISITED = -1;          // Number of paths has not yet been calculated
+
 	public static void main(String[] args) {
 		// Read input file
 		File inputFile;
@@ -44,9 +49,9 @@ public class PathCounter {
 		 * This array helps remove the need for recalculating the number of paths.
 		 */
 		long[] paths = new long[numVertices];
-		
+
 		// Initialize all indices to NOT_VISITED to indicate the number of paths from this node hasn't been calculated yet
-		for (int i = 0; i < paths.length; i++) { 
+		for (int i = 0; i < paths.length; i++) {
 			paths[i] = NOT_VISITED;
 		}
 
@@ -80,16 +85,17 @@ public class PathCounter {
 	public static long findNumOfPaths(int a, int b, LinkedList<Integer>[] graph, long[] paths) {
 		long total = 0;
 
-		// If this node has already been visited, mark it as a loop
+		// If current node has already been visited, mark it as a loop
 		if (paths[b] == VISITED) {
 			paths[b] = INFINITE_NOT_IN_PATH;
+			// Remove from path
 			return 0;
-		} 
-		//TODO 
+		}
+		// If the number of paths has already been calculated, return how many paths there are from end to current node
 		else if (paths[b] != NOT_VISITED) {
 			return paths[b];
-		} 
-		//TODO
+		}
+		// If current node hasn't already been visited 
 		else {
 			paths[b] = VISITED;
 			// If you have reached the top, mark as complete path (base case)
@@ -111,17 +117,23 @@ public class PathCounter {
 				}
 			}
 		}
-		// If the current node is part of an infinite loop, find out if it's in our path
+		/* If the current node is part of an infinite loop, find out if it's in our path.
+		 * Since all nodes in loop are initially marked as INFINITE_NOT_IN_PATH, we now need to 
+		 * see if they are in path and mark them accordingly
+		 */
 		if (paths[b] == INFINITE_NOT_IN_PATH) {
+			// If the total > 0, then the node is part of our path
 			if (total > 0) {
 				paths[b] = INFINITE_IN_PATH;
 				return INFINITE_IN_PATH;
-			} else if (total == 0) {
+			} 
+			// If there are no paths from s to t, remove from path
+			else if (total == 0) {
 				paths[b] = 0;
 				return 0;
 			}
 		} else {
-			// Save the result
+			// Memoize the result
 			paths[b] = total;
 		}
 		return total;
