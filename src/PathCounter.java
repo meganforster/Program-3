@@ -45,8 +45,8 @@ public class PathCounter {
 		@SuppressWarnings("unchecked")
 		LinkedList<Integer>[] graph = new LinkedList[numVertices];
 
-		/* Create an array that represents the number of paths from each node.
-		 * This array helps remove the need for recalculating the number of paths.
+		/* Create an array that represents the number of paths from the ending node to the 
+		 * current node. This array helps remove the need for recalculating the number of paths.
 		 */
 		long[] paths = new long[numVertices];
 
