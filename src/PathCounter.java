@@ -19,7 +19,7 @@ public class PathCounter {
 		Scanner input = null;
 		try {
 			// cycle2, cycle7 give numerical answers instead of infinite
-			inputFile = new File("cycle7.input");
+			inputFile = new File("simple8.input");
 			input = new Scanner(inputFile);
 		} catch (NullPointerException | FileNotFoundException e) {
 			System.err.println("Error: file not found");
@@ -45,7 +45,7 @@ public class PathCounter {
 		}
 
 		// Parse file for all edges and add to graph
-		long startTime = System.currentTimeMillis(); // Captures the time when the calculation begins
+		
 		for (int i = 0; i < numEdges; i++) {
 			int a = input.nextInt();
 			int b = input.nextInt();
@@ -63,16 +63,15 @@ public class PathCounter {
 
 		long finalTotal = findNumOfPaths(s, t, graph, paths);
 		if (finalTotal == -3) {
-			System.out.println("There are infinite paths from " + s + " to " + t + ".");
+			System.out.println("INFINITE");
 
 		} else {
 
 			System.out
-					.println("There are " + findNumOfPaths(s, t, graph, paths) + " paths from " + s + " to " + t + ".");
+					.println(finalTotal);
 		}
 
-		// Prints how long the calculation took
-		System.out.println("How long this took: " + (System.currentTimeMillis() - startTime));
+		
 	}
 
 	// Find the paths from point a to b
